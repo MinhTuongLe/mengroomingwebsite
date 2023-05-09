@@ -84,6 +84,7 @@ const ProductFilter = () => {
         <div className={styles.price}>
           <input
             type="range"
+            step={10000}
             value={price}
             onChange={(e) => setPrice(e.target.value)}
             min={minPrice}

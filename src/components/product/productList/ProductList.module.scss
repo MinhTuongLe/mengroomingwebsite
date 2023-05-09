@@ -16,7 +16,6 @@
         cursor: pointer;
       }
     }
-
     .sort {
       label {
         font-size: 1.4rem;
@@ -72,7 +71,7 @@
 
 .grid {
   display: flex;
-  justify-content: space-around;
+  justify-content: flex-start;
 
   flex-wrap: wrap;
   // padding: 1rem 0;

@@ -46,11 +46,7 @@ const Header = () => {
   const dispatch = useDispatch();
 
   const fixNavbar = () => {
-    if (window.scrollY > 50) {
-      setScrollPage(true);
-    } else {
-      setScrollPage(false);
-    }
+    setScrollPage(window.scrollY > 50)
   };
   window.addEventListener("scroll", fixNavbar);
 
@@ -60,7 +56,7 @@ const Header = () => {
       if (user) {
         // console.log(user);
         if (user.displayName == null) {
-          const u1 = user.email.slice(0, user.email.indexOf('@'));
+          const u1 = user.email.slice(0, user.email.indexOf("@"));
           const uName = u1.charAt(0).toUpperCase() + u1.slice(1);
           setdisplayName(uName);
         } else {
@@ -92,11 +88,11 @@ const Header = () => {
   const logoutUser = () => {
     signOut(auth)
       .then(() => {
-        toast.success("Logout successfully.");
+        toast.success("Logout successfully.", { autoClose: 1000 });
         navigate("/");
       })
       .catch((error) => {
-        toast.error(error.message);
+        toast.error(error.message, { autoClose: 1000 });
       });
   };
 

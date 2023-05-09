@@ -26,6 +26,29 @@
       border-radius: 3px;
       outline: none;
     }
+
+    .price {
+      input[type=range] {
+        -webkit-appearance: none;
+        width: 80%;
+        height: 5px;
+        background-color: orangered;
+        outline: none;
+        opacity: 0.8;
+        -webkit-transition: opacity 0.2s;
+        transition: opacity 0.2s;
+      }
+      
+      input[type=range]::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 14px;
+        height: 14px;
+        background-color: #0a1930;
+        border-radius: 50%;
+        cursor: pointer;
+      }
+    }
   }
 }
 
@@ -46,6 +69,8 @@
   position: relative;
   // margin-bottom: 2px;
   padding-left: 1rem;
+  color: orangered;
+  border-bottom-color: orangered !important;
 }
 
 .active::before {
@@ -53,7 +78,7 @@
   position: absolute;
   left: 0;
   bottom: 0;
-  width: 2px;
+  width: 3px;
   height: 100%;
-  background-color: var(--color-danger);
+  background-color: orangered;
 }

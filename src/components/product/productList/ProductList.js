@@ -20,7 +20,7 @@ const ProductList = ({ products }) => {
 
   // Pagination states
   const [currentPage, setCurrentPage] = useState(1);
-  const [productsPerPage] = useState(12);
+  const [productsPerPage, setProductPerPage] = useState(12);
   // Get Current Products
   const indexOfLastProduct = currentPage * productsPerPage;
   const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
@@ -45,11 +45,23 @@ const ProductList = ({ products }) => {
         <div className={styles.icons}>
           <BsFillGridFill
             size={22}
-            color="orangered"
-            onClick={() => setGrid(true)}
+            color={grid ? "orangered" : "#0066d4"}
+            style={grid ? { width: 28, height: 28 } : null}
+            onClick={() => {
+              setGrid(true);
+              setProductPerPage(12);
+            }}
           />
 
-          <FaListAlt size={24} color="#0066d4" onClick={() => setGrid(false)} />
+          <FaListAlt
+            size={24}
+            color={!grid ? "orangered" : "#0066d4"}
+            style={!grid ? { width: 28, height: 28 } : null}
+            onClick={() => {
+              setGrid(false);
+              setProductPerPage(4);
+            }}
+          />
 
           <p>
             <b>{filteredProducts.length}</b> Products found.

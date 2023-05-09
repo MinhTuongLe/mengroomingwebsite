@@ -19,11 +19,11 @@ const Reset = () => {
     sendPasswordResetEmail(auth, email)
       .then(() => {
         setIsLoading(false);
-        toast.success("Check your email for a reset link");
+        toast.success("Check your email for a reset link", {autoClose: 1000});
       })
       .catch((error) => {
         setIsLoading(false);
-        toast.error(error.message);
+        toast.error(error.message, {autoClose: 1000});
       });
   };
 
@@ -48,7 +48,7 @@ const Reset = () => {
                 onChange={(e) => setEmail(e.target.value)}
               />
 
-              <button type="submit" className="--btn --btn-primary --btn-block">
+              <button type="submit" className="--btn --btn-danger --btn-block">
                 Reset Password
               </button>
               <div className={styles.links}>

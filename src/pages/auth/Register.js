@@ -19,7 +19,7 @@ const Register = () => {
   const registerUser = (e) => {
     e.preventDefault();
     if (password !== cPassword) {
-      toast.error("Passwords do not match.");
+      toast.error("Passwords do not match.", {autoClose: 1000});
     }
     setIsLoading(true);
 
@@ -28,11 +28,11 @@ const Register = () => {
         const user = userCredential.user;
         console.log(user);
         setIsLoading(false);
-        toast.success("Registration Successful...");
+        toast.success("Registration Successful...", {autoClose: 1000});
         navigate("/login");
       })
       .catch((error) => {
-        toast.error(error.message);
+        toast.error(error.message, {autoClose: 1000});
         setIsLoading(false);
       });
   };
@@ -67,7 +67,7 @@ const Register = () => {
                 value={cPassword}
                 onChange={(e) => setCPassword(e.target.value)}
               />
-              <button type="submit" className="--btn --btn-primary --btn-block">
+              <button type="submit" className="--btn --btn-danger --btn-block">
                 Register
               </button>
             </form>

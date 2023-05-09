@@ -38,26 +38,26 @@ const Login = () => {
       .then((userCredential) => {
         // const user = userCredential.user;
         setIsLoading(false);
-        toast.success("Login Successful...");
+        toast.success("Login Successful...", {autoClose: 1000});
         redirectUser();
       })
       .catch((error) => {
         setIsLoading(false);
-        toast.error(error.message);
+        toast.error(error.message, {autoClose: 1000});
       });
   };
 
-  // Login with Goooglr
+  // Login with Gooogle
   const provider = new GoogleAuthProvider();
   const signInWithGoogle = () => {
     signInWithPopup(auth, provider)
       .then((result) => {
         // const user = result.user;
-        toast.success("Login Successfully");
+        toast.success("Login Successfully", {autoClose: 1000});
         redirectUser();
       })
       .catch((error) => {
-        toast.error(error.message);
+        toast.error(error.message, {autoClose: 1000});
       });
   };
 
@@ -88,7 +88,7 @@ const Login = () => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
-              <button type="submit" className="--btn --btn-primary --btn-block">
+              <button type="submit" className="--btn --btn-danger --btn-block">
                 Login
               </button>
               <div className={styles.links}>
@@ -97,13 +97,13 @@ const Login = () => {
               <p>-- or --</p>
             </form>
             <button
-              className="--btn --btn-danger --btn-block"
+              className="--btn --btn-primary --btn-block"
               onClick={signInWithGoogle}
             >
-              <FaGoogle color="#fff" /> Login With Google
+              <FaGoogle color="#fff" style={{marginRight: 10}}/> Login With Google
             </button>
             <span className={styles.register}>
-              <p>Don't have an account?</p>
+              <p style={{marginRight: 4}}>Don't have an account?</p>
               <Link to="/register">Register</Link>
             </span>
           </div>

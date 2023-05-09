@@ -59,9 +59,9 @@ const Contact = () => {
                 placeholder="Subject"
                 required
               />
-              <label>Message</label>
+              <label>Feedback</label>
               <textarea name="message" cols="30" rows="10" placeholder="Your Feedback"></textarea>
-              <button className="--btn --btn-primary">Send Message</button>
+              <button className="--btn --btn-danger">Send Message</button>
             </Card>
           </form>
 

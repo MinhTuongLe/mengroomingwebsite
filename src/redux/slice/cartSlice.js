@@ -26,6 +26,7 @@ const cartSlice = createSlice({
         state.cartItems[productIndex].cartQuantity += 1;
         toast.info(`${action.payload.name} increased by one`, {
           position: "top-left",
+          autoClose: 1000
         });
       } else {
         // Item doesn't exists in the cart
@@ -34,6 +35,7 @@ const cartSlice = createSlice({
         state.cartItems.push(tempProduct);
         toast.success(`${action.payload.name} added to cart`, {
           position: "top-left",
+          autoClose: 1000
         });
       }
       // save cart to LS
@@ -49,6 +51,7 @@ const cartSlice = createSlice({
         state.cartItems[productIndex].cartQuantity -= 1;
         toast.info(`${action.payload.name} decreased by one`, {
           position: "top-left",
+          autoClose: 1000
         });
       } else if (state.cartItems[productIndex].cartQuantity === 1) {
         const newCartItem = state.cartItems.filter(
@@ -57,6 +60,7 @@ const cartSlice = createSlice({
         state.cartItems = newCartItem;
         toast.success(`${action.payload.name} removed from cart`, {
           position: "top-left",
+          autoClose: 1000
         });
       }
       localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
@@ -69,6 +73,7 @@ const cartSlice = createSlice({
       state.cartItems = newCartItem;
       toast.success(`${action.payload.name} removed from cart`, {
         position: "top-left",
+        autoClose: 1000
       });
 
       localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
@@ -77,6 +82,7 @@ const cartSlice = createSlice({
       state.cartItems = [];
       toast.info(`Cart cleared`, {
         position: "top-left",
+        autoClose: 1000
       });
 
       localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
