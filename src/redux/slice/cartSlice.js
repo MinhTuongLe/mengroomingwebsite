@@ -84,7 +84,7 @@ const cartSlice = createSlice({
         position: "top-left",
         autoClose: 1000
       });
-
+      state.cartTotalQuantity = 0;
       localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
     },
     CALCULATE_SUBTOTAL(state, action) {

@@ -9,7 +9,8 @@ import {
   SAVE_SHIPPING_ADDRESS,
 } from "../../redux/slice/checkoutSlice";
 import styles from "./CheckoutDetails.module.scss";
-
+import { toast } from "react-toastify";
+import { CLEAR_CART } from "../../redux/slice/cartSlice";
 const initialAddressState = {
   name: "",
   line1: "",
@@ -48,11 +49,21 @@ const CheckoutDetails = () => {
     });
   };
 
+  const clearCart = () => {
+    dispatch(CLEAR_CART());
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(SAVE_SHIPPING_ADDRESS(shippingAddress));
-    dispatch(SAVE_BILLING_ADDRESS(billingAddress));
-    navigate("/checkout");
+    // dispatch(SAVE_SHIPPING_ADDRESS(shippingAddress));
+    // dispatch(SAVE_BILLING_ADDRESS(billingAddress));
+    navigate("/");
+    try {
+      toast.success("Checkout Successful...", { autoClose: 1000 });
+      clearCart();
+    } catch (error) {
+      toast.error(error.message, { autoClose: 1000 });
+    }
   };
 
   return (
@@ -72,23 +83,23 @@ const CheckoutDetails = () => {
                 value={shippingAddress.name}
                 onChange={(e) => handleShipping(e)}
               />
-              <label>Address line 1</label>
+              <label>Address line</label>
               <input
                 type="text"
-                placeholder="Address line 1"
+                placeholder="Address line"
                 required
                 name="line1"
                 value={shippingAddress.line1}
                 onChange={(e) => handleShipping(e)}
               />
-              <label>Address line 2</label>
+              {/* <label>Address line 2</label>
               <input
                 type="text"
                 placeholder="Address line 2"
                 name="line2"
                 value={shippingAddress.line2}
                 onChange={(e) => handleShipping(e)}
-              />
+              /> */}
               <label>City</label>
               <input
                 type="text"
@@ -138,86 +149,6 @@ const CheckoutDetails = () => {
                 name="phone"
                 value={shippingAddress.phone}
                 onChange={(e) => handleShipping(e)}
-              />
-            </Card>
-            {/* BILLING ADDRESS */}
-            <Card cardClass={styles.card}>
-              <h3>Billing Address</h3>
-              <label>Recipient Name</label>
-              <input
-                type="text"
-                placeholder="Name"
-                required
-                name="name"
-                value={billingAddress.name}
-                onChange={(e) => handleBilling(e)}
-              />
-              <label>Address line 1</label>
-              <input
-                type="text"
-                placeholder="Address line 1"
-                required
-                name="line1"
-                value={billingAddress.line1}
-                onChange={(e) => handleBilling(e)}
-              />
-              <label>Address line 2</label>
-              <input
-                type="text"
-                placeholder="Address line 2"
-                name="line2"
-                value={billingAddress.line2}
-                onChange={(e) => handleBilling(e)}
-              />
-              <label>City</label>
-              <input
-                type="text"
-                placeholder="City"
-                required
-                name="city"
-                value={billingAddress.city}
-                onChange={(e) => handleBilling(e)}
-              />
-              <label>State</label>
-              <input
-                type="text"
-                placeholder="State"
-                required
-                name="state"
-                value={billingAddress.state}
-                onChange={(e) => handleBilling(e)}
-              />
-              <label>Postal code</label>
-              <input
-                type="text"
-                placeholder="Postal code"
-                required
-                name="postal_code"
-                value={billingAddress.postal_code}
-                onChange={(e) => handleBilling(e)}
-              />
-              {/* COUNTRY INPUT */}
-              <CountryDropdown
-                className={styles.select}
-                valueType="short"
-                value={billingAddress.country}
-                onChange={(val) =>
-                  handleBilling({
-                    target: {
-                      name: "country",
-                      value: val,
-                    },
-                  })
-                }
-              />
-              <label>Phone</label>
-              <input
-                type="text"
-                placeholder="Phone"
-                required
-                name="phone"
-                value={billingAddress.phone}
-                onChange={(e) => handleBilling(e)}
               />
               <button type="submit" className="--btn --btn-primary">
                 Proceed To Checkout

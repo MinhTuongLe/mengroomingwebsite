@@ -98,7 +98,7 @@ const Cart = () => {
                         <img
                           src={imageURL}
                           alt={name}
-                          style={{ width: "100px" }}
+                          style={{ width: "100px", marginTop: "12px" }}
                         />
                       </td>
                       <td>{price} VND</td>
