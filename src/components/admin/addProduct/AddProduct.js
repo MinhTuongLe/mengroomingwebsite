@@ -76,12 +76,12 @@ const AddProduct = () => {
         setUploadProgress(progress);
       },
       (error) => {
-        toast.error(error.message);
+        toast.error(error.message, {autoClose: 1000});
       },
       () => {
         getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
           setProduct({ ...product, imageURL: downloadURL });
-          toast.success("Image uploaded successfully.");
+          toast.success("Image uploaded successfully.", {autoClose: 1000});
         });
       }
     );
@@ -106,11 +106,11 @@ const AddProduct = () => {
       setUploadProgress(0);
       setProduct({ ...initialState });
 
-      toast.success("Product uploaded successfully.");
+      toast.success("Product uploaded successfully.", {autoClose: 1000});
       navigate("/admin/all-products");
     } catch (error) {
       setIsLoading(false);
-      toast.error(error.message);
+      toast.error(error.message, {autoClose: 1000});
     }
   };
 
@@ -135,11 +135,11 @@ const AddProduct = () => {
         editedAt: Timestamp.now().toDate(),
       });
       setIsLoading(false);
-      toast.success("Product Edited Successfully");
+      toast.success("Product Edited Successfully", {autoClose: 1000});
       navigate("/admin/all-products");
     } catch (error) {
       setIsLoading(false);
-      toast.error(error.message);
+      toast.error(error.message, {autoClose: 1000});
     }
   };
 

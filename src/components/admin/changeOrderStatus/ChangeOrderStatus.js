@@ -32,11 +32,11 @@ const ChangeOrderStatus = ({ order, id }) => {
       setDoc(doc(db, "orders", id), orderConfig);
 
       setIsLoading(false);
-      toast.success("Order status changes successfully");
+      toast.success("Order status changes successfully", {autoClose: 1000});
       navigate("/admin/orders");
     } catch (error) {
       setIsLoading(false);
-      toast.error(error.message);
+      toast.error(error.message, {autoClose: 1000});
     }
   };
 
