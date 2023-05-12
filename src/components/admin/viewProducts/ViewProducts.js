@@ -1,19 +1,17 @@
-import { deleteDoc, doc } from "firebase/firestore";
+import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
-import { db, storage } from "../../../firebase/config";
+import { storage } from "../../../firebase/config";
 import styles from "./ViewProducts.module.scss";
 import { FaEdit, FaTrashAlt } from "react-icons/fa";
 import Loader from "../../loader/Loader";
-import { deleteObject, ref } from "firebase/storage";
 import Notiflix from "notiflix";
 import { useDispatch, useSelector } from "react-redux";
 import {
   selectProducts,
   STORE_PRODUCTS,
 } from "../../../redux/slice/productSlice";
-import useFetchCollection from "../../../customHooks/useFetchCollection";
 import {
   FILTER_BY_SEARCH,
   selectFilteredProducts,
@@ -21,10 +19,12 @@ import {
 import Search from "../../search/Search";
 import Pagination from "../../pagination/Pagination";
 
+const apiUrl = "http://localhost:8080/api/v1";
+
 const ViewProducts = () => {
   const [search, setSearch] = useState("");
-  const { data, isLoading } = useFetchCollection("products");
-  const products = useSelector(selectProducts);
+  const [isLoading, setIsLoading] = useState(true);
+  const [products, setProducts] = useState([]);
   const filteredProducts = useSelector(selectFilteredProducts);
   // Pagination states
   const [currentPage, setCurrentPage] = useState(1);
@@ -39,12 +39,28 @@ const ViewProducts = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    const getProducts = async () => {
+      try {
+        const response = await axios.get(`${apiUrl}/products`);
+        console.log(response.data);
+
+        setProducts(response.data);
+        setIsLoading(false);
+      } catch (error) {
+        toast.error(error.message);
+      }
+    };
+
+    getProducts();
+  }, []);
+
+  useEffect(() => {
     dispatch(
       STORE_PRODUCTS({
-        products: data,
+        products: products,
       })
     );
-  }, [dispatch, data]);
+  }, [dispatch, products]);
 
   useEffect(() => {
     dispatch(FILTER_BY_SEARCH({ products, search }));
@@ -72,17 +88,33 @@ const ViewProducts = () => {
     );
   };
 
-  const deleteProduct = async (id, imageURL) => {
-    try {
-      await deleteDoc(doc(db, "products", id));
+  const [deletedProductId, setDeletedProductId] = useState(null);
+ const deleteProduct = async (id, imageURL) => {
+   try {
+     await axios.delete(`${apiUrl}/products/${id}`);
 
-      const storageRef = ref(storage, imageURL);
-      await deleteObject(storageRef);
-      toast.success("Product deleted successfully.");
-    } catch (error) {
-      toast.error(error.message);
-    }
-  };
+     toast.success("Product deleted successfully.");
+     setDeletedProductId(id);
+   } catch (error) {
+     toast.error(error.message);
+   }
+ };
+
+ useEffect(() => {
+   if (deletedProductId) {
+     const getProducts = async () => {
+       try {
+         const response = await axios.get(`${apiUrl}/products`);
+         setProducts(response.data);
+         setIsLoading(false);
+       } catch (error) {
+         toast.error(error.message);
+       }
+     };
+     getProducts();
+   }
+ }, [deletedProductId]);
+
 
   return (
     <>

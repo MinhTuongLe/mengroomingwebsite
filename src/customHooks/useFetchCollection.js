@@ -1,7 +1,8 @@
-import { collection, getDocs } from "firebase/firestore";
+import axios from "axios";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import { db } from "../firebase/config";
+
+const apiUrl = "http://localhost:8080/api/v1";
 
 const useFetchCollection = (collectionName) => {
   const [data, setData] = useState([]);
@@ -10,12 +11,14 @@ const useFetchCollection = (collectionName) => {
   const getCollection = async () => {
     setIsLoading(true);
     try {
-      const querySnapshot = await getDocs(collection(db, collectionName));
-      const allData = querySnapshot.docs.map((doc) => ({
-        id: doc.id,
-        ...doc.data(),
+      const response = await axios.get(`${apiUrl}/products`);
+      const allData = response.data.map((doc) => ({
+    
+        id: doc.name.split("/").pop(),
+        ...doc.fields,
       }));
-      setData(allData)
+
+      setData(response.data);
       setIsLoading(false);
     } catch (error) {
       setIsLoading(false);
