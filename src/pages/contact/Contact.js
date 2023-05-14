@@ -22,10 +22,10 @@ const Contact = () => {
       )
       .then(
         (result) => {
-          toast.success("Message sent successfully");
+          toast.success("Message sent successfully", { autoClose: 1000 });
         },
         (error) => {
-          toast.error(error.text);
+          toast.error(error.text, { autoClose: 1000 });
         }
       );
     e.target.reset();
@@ -60,7 +60,12 @@ const Contact = () => {
                 required
               />
               <label>Feedback</label>
-              <textarea name="message" cols="30" rows="10" placeholder="Your Feedback"></textarea>
+              <textarea
+                name="message"
+                cols="30"
+                rows="10"
+                placeholder="Your Feedback"
+              ></textarea>
               <button className="--btn --btn-danger">Send Message</button>
             </Card>
           </form>
@@ -68,7 +73,10 @@ const Contact = () => {
           <div className={styles.details}>
             <Card cardClass={styles.card2}>
               <h3>Our Contact Information</h3>
-              <p>Fill out the form or contact us through the contact information below</p>
+              <p>
+                Fill out the form or contact us through the contact information
+                below
+              </p>
               <div className={styles.icons}>
                 <span>
                   <FaPhoneAlt />

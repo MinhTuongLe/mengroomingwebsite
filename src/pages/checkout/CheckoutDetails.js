@@ -83,10 +83,10 @@ const CheckoutDetails = () => {
                 value={shippingAddress.name}
                 onChange={(e) => handleShipping(e)}
               />
-              <label>Address line</label>
+              <label>Address</label>
               <input
                 type="text"
-                placeholder="Address line"
+                placeholder="Address"
                 required
                 name="line1"
                 value={shippingAddress.line1}
@@ -100,7 +100,7 @@ const CheckoutDetails = () => {
                 value={shippingAddress.line2}
                 onChange={(e) => handleShipping(e)}
               /> */}
-              <label>City</label>
+              {/* <label>City</label>
               <input
                 type="text"
                 placeholder="City"
@@ -108,8 +108,8 @@ const CheckoutDetails = () => {
                 name="city"
                 value={shippingAddress.city}
                 onChange={(e) => handleShipping(e)}
-              />
-              <label>State</label>
+              /> */}
+              {/* <label>State</label>
               <input
                 type="text"
                 placeholder="State"
@@ -117,17 +117,18 @@ const CheckoutDetails = () => {
                 name="state"
                 value={shippingAddress.state}
                 onChange={(e) => handleShipping(e)}
-              />
-              <label>Postal code</label>
+              /> */}
+              <label>Discount code</label>
               <input
                 type="text"
-                placeholder="Postal code"
+                placeholder="Discount code"
                 required
                 name="postal_code"
                 value={shippingAddress.postal_code}
                 onChange={(e) => handleShipping(e)}
               />
               {/* COUNTRY INPUT */}
+              <label>Country</label>
               <CountryDropdown
                 className={styles.select}
                 valueType="short"
