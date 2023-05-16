@@ -1,16 +1,20 @@
 .checkout {
   width: 100%;
   position: relative;
+  height: 70vh;
 
-  .card {
+  .card, .card2 {
     width: 100%;
     max-width: 500px;
     padding: 1rem;
+
     h3 {
       font-weight: 300;
     }
   }
-
+  .card2 {
+    float: right;
+  }
   form {
     width: 100%;
     display: flex;

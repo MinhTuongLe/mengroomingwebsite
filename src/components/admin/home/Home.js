@@ -45,30 +45,32 @@ const Home = () => {
   }, [dispatch, data, fbProducts]);
 
   return (
-    <div className={styles.home}>
-      <h2>Admin Home</h2>
-      <div className={styles["info-box"]}>
-        <InfoBox
-          cardClass={`${styles.card} ${styles.card1}`}
-          title={"Earnings"}
-          count={`${totalOrderAmount} VND`}
-          icon={earningIcon}
-        />
-        <InfoBox
-          cardClass={`${styles.card} ${styles.card2}`}
-          title={"Products"}
-          count={products.length}
-          icon={productIcon}
-        />
-        <InfoBox
-          cardClass={`${styles.card} ${styles.card3}`}
-          title={"Orders"}
-          count={orders.length}
-          icon={ordersIcon}
-        />
-      </div>
-      <div>
-        <Chart />
+    <div>
+      <h2 className={styles.title}>Admin Home</h2>
+      <div className={styles.home}>
+        <div className={styles["info-box"]}>
+          <InfoBox
+            cardClass={`${styles.card} ${styles.card1}`}
+            title={"Earnings"}
+            count={`${totalOrderAmount} VND`}
+            icon={earningIcon}
+          />
+          <InfoBox
+            cardClass={`${styles.card} ${styles.card2}`}
+            title={"Products"}
+            count={products.length}
+            icon={productIcon}
+          />
+          <InfoBox
+            cardClass={`${styles.card} ${styles.card3}`}
+            title={"Orders"}
+            count={orders.length}
+            icon={ordersIcon}
+          />
+        </div>
+        <div style={{display:"flex", alignItems:"center"}}>
+          <Chart />
+        </div>
       </div>
     </div>
   );

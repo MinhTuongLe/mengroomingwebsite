@@ -14,7 +14,7 @@ const Navbar = () => {
     <div className={styles.navbar}>
       <div className={styles.user}>
         <FaUserCircle size={40} color="#fff" />
-        <h4>{userName}</h4>
+        <h4 style={{marginTop:"1rem"}}>{userName}</h4>
       </div>
       <nav>
         <ul>

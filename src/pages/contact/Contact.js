@@ -60,7 +60,7 @@ const Contact = () => {
                 required
               />
               <label>Feedback</label>
-              <textarea name="message" cols="30" rows="10" placeholder="Your Feedback"></textarea>
+              <textarea name="message" cols="30" rows="8" placeholder="Your Feedback"></textarea>
               <button className="--btn --btn-danger">Send Message</button>
             </Card>
           </form>

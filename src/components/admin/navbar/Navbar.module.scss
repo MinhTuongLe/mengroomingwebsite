@@ -1,13 +1,13 @@
 .navbar {
   border-right: 1px solid #ccc;
-  min-height: 80vh;
+  height: 20vh;
 
   .user {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    padding: 4rem;
+    padding: 1rem;
     background-color: var(--light-blue);
 
     h4 {
@@ -16,11 +16,16 @@
   }
 
   nav ul {
+    display: flex;
+    list-style: none;
+    text-align: center;
     li {
-      border-bottom: 1px solid #ccc;
-      padding: 1rem;
+      flex: 1;
+      line-height: 6rem;
+      border: 1px solid #ccc;
       position: relative;
       a {
+        font-size: 2rem;
         display: block;
         width: 100%;
       }
@@ -30,14 +35,20 @@
 
 .active {
   cursor: pointer;
+  background-color: orangered;
+  color: white;
+  &:hover {
+    color: white;
+    opacity: 0.8;
+  }
 }
 
-.active::before {
-  content: "";
-  position: absolute;
-  right: 0;
-  top: 0;
-  width: 4px;
-  height: 100%;
-  background-color: orangered;
-}
+// .active::before {
+//   content: "";
+//   position: absolute;
+//   right: 0;
+//   top: 0;
+//   width: 4px;
+//   height: 100%;
+//   background-color: orangered;
+// }

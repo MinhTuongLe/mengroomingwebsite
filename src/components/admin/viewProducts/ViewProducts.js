@@ -24,6 +24,7 @@ import Pagination from "../../pagination/Pagination";
 const ViewProducts = () => {
   const [search, setSearch] = useState("");
   const { data, isLoading } = useFetchCollection("products");
+  const [reload, setReload] = useState(false);
   const products = useSelector(selectProducts);
   const filteredProducts = useSelector(selectFilteredProducts);
   // Pagination states
@@ -75,14 +76,22 @@ const ViewProducts = () => {
   const deleteProduct = async (id, imageURL) => {
     try {
       await deleteDoc(doc(db, "products", id));
-
       const storageRef = ref(storage, imageURL);
       await deleteObject(storageRef);
-      toast.success("Product deleted successfully.");
+      toast.success("Product deleted successfully.", {
+        autoClose: 1000,
+        onClose: () => setReload(true),
+      });
     } catch (error) {
-      toast.error(error.message);
+      toast.error(error.message, { autoClose: 1000 });
     }
   };
+
+  useEffect(() => {
+    if (reload) {
+      window.location.reload();
+    }
+  }, [reload]);
 
   return (
     <>
